@@ -36,17 +36,41 @@ This project implements a simplified version of the YOLOv1 object detection mode
 
 ---
 
-## 📊 Results
+## 🔍 Hyperparameter Experiments
 
-| Metric    | Value                               |
-| --------- | ----------------------------------- |
-| Accuracy  | 0.045                               |
-| Precision | 0.3056                              |
-| Recall    | 0.0454                              |
-| AUC / IoU | Low due to limited data and compute |
+### Learning Rate Too High (LR=1):
 
-* Visualization: Model did not predict accurately on most objects due to insufficient training data
-* Confusion matrix and bounding box examples included
+Training became unstable and diverged after a few epochs.
+
+![LR=1](img/lr1_loss.png)
+
+### Learning Rate Too Low (LR=1e-8):
+
+Training was extremely slow and failed to converge meaningfully.
+
+![LR=1e-8](img/lr1e-8_loss.png)
+
+### Final Training Loss Curve:
+
+Demonstrates that the model was able to converge when using appropriate learning rate and training strategy.
+
+![Final Loss](img/final_loss_curve.png)
+
+---
+
+## 📊 Evaluation Results
+
+### IoU Frequency Distribution:
+
+Majority of predicted bounding boxes had low IoU scores, indicating poor localization. A small number showed moderate overlap.
+
+![IoU](img/iou_histogram.png)
+
+### Confusion Matrix:
+
+Model exhibited low per-class accuracy, with many misclassifications and confusion among similar classes (e.g., person vs. boat).
+
+![Confusion Matrix](img/confusion_matrix.png)
 
 ---
 
@@ -64,16 +88,19 @@ This project implements a simplified version of the YOLOv1 object detection mode
 
 ---
 
-## 🔍 File Structure
+## 📁 File Structure
 
 ```
 yolo-voc-detection/
 ├── README.md                   # This file
-├── architecture.png            # YOLO + ResNet structure diagram
-├── preprocessing_example.ipynb # Sample notebook for label conversion
-├── training_log.png            # Loss curve and confusion matrix
-├── final_report.pdf            # Full project report
-└── results.md                  # Notes on prediction examples and error analysis
+├── img/
+│   ├── lr1_loss.png
+│   ├── lr1e-8_loss.png
+│   ├── final_loss_curve.png
+│   ├── iou_histogram.png
+│   └── confusion_matrix.png
+├── Final_Report.pdf            # Full project report
+├── Yolo_Processing.ipynb       # YOLO data preprocessing & training code
 ```
 
 ---
